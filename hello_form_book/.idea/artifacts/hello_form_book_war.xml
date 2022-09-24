@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hello_form_book:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>hello_form_book</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="hello_form_book-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="hello_form_book:war exploded" />
+    </root>
+  </artifact>
+</component>
