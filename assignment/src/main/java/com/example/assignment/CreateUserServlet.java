@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 import com.example.assignment.User;
 
@@ -26,10 +27,20 @@ public class CreateUserServlet extends HttpServlet {
         //create a new user model (domain object)
         User user = new User (name, address);
 
+
+
+        //LAB 4 - list returns all user objects
+        List<User> userList = UserDAO.instance.list();
+
+
+
         //add the model as an attribute in the request
         request.setAttribute("user", user);
 
         //forward the updated request and response to out ShowUser View
         request.getRequestDispatcher("showUser.jsp").forward(request, response);
+
+
+
     }
 }
