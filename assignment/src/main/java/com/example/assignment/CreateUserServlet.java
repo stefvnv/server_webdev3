@@ -29,7 +29,7 @@ public class CreateUserServlet extends HttpServlet {
 
 
 
-        //LAB 4 - list returns all user objects
+        //NOT SURE WHERE TO PLACE THIS!!! GET MAYBE???
         List<User> userList = UserDAO.instance.list();
 
 
@@ -39,8 +39,5 @@ public class CreateUserServlet extends HttpServlet {
 
         //forward the updated request and response to out ShowUser View
         request.getRequestDispatcher("showUser.jsp").forward(request, response);
-
-
-
     }
 }
