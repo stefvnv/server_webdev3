@@ -16,5 +16,9 @@ public class HouseControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<House> houseList = HouseDAO.instance.list();
+        request.setAttribute("house", houseList);
+
+        //forward the updated request and response to out ShowHouse View
+        request.getRequestDispatcher("showHouse.jsp").forward(request, response);
     }
 }
