@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "CreateHouseServlet", value = "/CreateHouseServlet")
 public class CreateHouseServlet extends HttpServlet {
-    private static final long serialVersionID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +20,7 @@ public class CreateHouseServlet extends HttpServlet {
         //get the value of the name and address parameters from our form
         String owner = request.getParameter("owner");
         String address = request.getParameter("address");
-        int noBedrooms = Integer.parseInt(request.getParameter("noBedrooms"));
+        String noBedrooms = request.getParameter("noBedrooms");
 
         //create a new house model (domain object)
         House house = new House(owner, address, noBedrooms);

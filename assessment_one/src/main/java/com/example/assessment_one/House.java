@@ -3,17 +3,28 @@ package com.example.assessment_one;
 public class House {
 
     //private fields/attributes
-    private String owner;
-    private String address;
-    private int noBedrooms;
+    private String owner = "name unknown";
+    private String address = "address unknown";
+    private int noBedrooms = 0;
 
 
     //public constructor from fields
-    public House(String owner, String address, int noBedrooms) {
+    public House(String owner, String address, String noBedrooms) {
         super();
-        this.owner = owner;
-        this.address = address;
-        this.noBedrooms = noBedrooms;
+        if (!owner.isEmpty()) {
+            this.owner = owner;
+        }
+        if (!address.isEmpty()) {
+            this.address = address;
+        }
+        if (!noBedrooms.isEmpty()) {
+            try {
+                this.noBedrooms = Integer.parseInt(noBedrooms);
+            } catch (NumberFormatException nfe) {
+                System.err.println(nfe.getMessage());
+                this.noBedrooms = 0;
+            }
+        }
     }
 
     //public setters and getters

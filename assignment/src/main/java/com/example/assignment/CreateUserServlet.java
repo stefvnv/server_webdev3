@@ -27,13 +27,6 @@ public class CreateUserServlet extends HttpServlet {
         //create a new user model (domain object)
         User user = new User (name, address);
 
-
-
-        //NOT SURE WHERE TO PLACE THIS!!! GET MAYBE???
-        List<User> userList = UserDAO.instance.list();
-
-
-
         //add the model as an attribute in the request
         request.setAttribute("user", user);
 
