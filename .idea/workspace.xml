@@ -9,7 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f454e09-12f4-4493-8df4-e5104a4fd4e7" name="Changes" comment="unversioned files" />
+    <list default="true" id="1f454e09-12f4-4493-8df4-e5104a4fd4e7" name="Changes" comment="unversioned files">
+      <change beforePath="$PROJECT_DIR$/lab5_example/doc/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab5_example/doc/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab5_example/src/main/java/com/example/lab5_example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab5_example/src/main/java/com/example/lab5_example/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab5_example/src/main/java/com/example/lab5_example/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab5_example/src/main/java/com/example/lab5_example/UserDAO.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +47,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "18",
-    "last_opened_file_path": "/home/stefana/IdeaProjects/server_webdev3",
+    "last_opened_file_path": "C:/Users/Stefana/Git/server_webdev3/lab5_example",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.24712643",
@@ -170,6 +174,7 @@
       <workItem from="1664027136129" duration="57000" />
       <workItem from="1664061526567" duration="30000" />
       <workItem from="1665838403528" duration="11000" />
+      <workItem from="1666108803217" duration="617000" />
     </task>
     <task id="LOCAL-00001" summary="wtf">
       <created>1663879664265</created>

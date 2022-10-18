@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <meta charset="ISO-8859-1">
+    <title>JSP - Hello</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+
+<form method="post" action="CreateUserServlet">
+    Enter name: <input type="text" name="name"><br>
+
+    Enter address: <input type="text" name="address"><br>
+    <input type="submit" value="Submit user form">
+</form>
 </body>
 </html>

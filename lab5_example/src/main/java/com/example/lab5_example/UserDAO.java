@@ -1,5 +1,8 @@
 package com.example.lab5_example;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +11,7 @@ public enum UserDAO {
 
     List<User> users;
 
-    private UserDAO(){
+    private UserDAO() {
         users = new ArrayList<User>(3);
 
         User user1 = new User("Paul", "Athlone");
@@ -21,7 +24,37 @@ public enum UserDAO {
         users.add(user3);
     }
 
-    public List <User> list(){
+    public List<User> list() {
         return users;
+    }
+
+
+    //database options
+    public Connection getConnection() throws Exception {
+        //load the driver class
+        Class.forName("org.hsqldb.jdbcDriver");
+
+        //get connection from DriverManager
+        Connection con;
+        con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/oneDB", "sa", "");
+        return con;
+    }
+
+
+    //get a connection to the database and insert new user
+    public void save(User user) throws Exception {
+
+        //get the connection
+        Connection connection = getConnection();
+
+        //create prepared statement with placeholders for the parameters
+        PreparedStatement psmt = connection.prepareStatement("INSERT INTO USER (name, address) VALUES(?,?)");
+
+        //update the placeholders with the model properties
+        psmt.setString(1, user.getName());
+        psmt.setString(2, user.getAddress());
+
+        //execute the statement
+        psmt.executeUpdate();
     }
 }
