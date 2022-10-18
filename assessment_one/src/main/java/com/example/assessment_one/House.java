@@ -3,8 +3,8 @@ package com.example.assessment_one;
 public class House {
 
     //private fields/attributes
-    private String owner = "name unknown";
-    private String address = "address unknown";
+    private String owner = "";
+    private String address = "";
     private int noBedrooms = 0;
 
 
@@ -12,10 +12,10 @@ public class House {
     public House(String owner, String address, String noBedrooms) {
         super();
         if (!owner.isEmpty()) {
-            this.owner = owner;
+            this.owner = null;
         }
         if (!address.isEmpty()) {
-            this.address = address;
+            this.address = null;
         }
         if (!noBedrooms.isEmpty()) {
             try {
