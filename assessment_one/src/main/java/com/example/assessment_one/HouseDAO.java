@@ -15,16 +15,16 @@ public enum HouseDAO {
 
         //populate instances into houses list
 
-        House houseOne = new House("Stefana the Cat", "865 Forest Street, Albuquerque", "3");
+        House houseOne = new House("Stefana the Cat", "865 Forest Street, Albuquerque", 3);
         houses.add(houseOne);
 
-        House houseTwo = new House("Sierra the Dog", "76231 Puppy Street, California", "2");
+        House houseTwo = new House("Sierra the Dog", "76231 Puppy Street, California", 2);
         houses.add(houseTwo);
 
-        House houseThree = new House("Barbie the Kitten", "9421 Animal Street, Chicago", "4");
+        House houseThree = new House("Barbie the Kitten", "9421 Animal Street, Chicago", 4);
         houses.add(houseThree);
 
-        House houseFour = new House("Martina Curran", "326 Galway Street, New York", "7");
+        House houseFour = new House("Martina Curran", "326 Galway Street, New York", 7);
         houses.add(houseFour);
     }
 

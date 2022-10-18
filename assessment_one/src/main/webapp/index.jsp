@@ -35,7 +35,7 @@
 
             <label>Number of Bedrooms</label>
             <label>
-                <input class="w3-input" type="text" name="noBedrooms">
+                <input class="w3-input" type="number" name="noBedrooms">
             </label>
 
             <div class="w3-margin">

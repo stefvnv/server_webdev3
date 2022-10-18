@@ -20,7 +20,13 @@ public class CreateHouseServlet extends HttpServlet {
         //get the value of the name and address parameters from our form
         String owner = request.getParameter("owner");
         String address = request.getParameter("address");
-        String noBedrooms = request.getParameter("noBedrooms");
+
+        int noBedrooms;
+        if (!request.getParameter("noBedrooms").isEmpty()) {
+            noBedrooms = Integer.parseInt(request.getParameter("noBedrooms"));
+        } else {
+            noBedrooms = 0;
+        }
 
         //create a new house model (domain object)
         House house = new House(owner, address, noBedrooms);

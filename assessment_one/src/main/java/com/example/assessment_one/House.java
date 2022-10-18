@@ -3,28 +3,29 @@ package com.example.assessment_one;
 public class House {
 
     //private fields/attributes
-    private String owner = "";
-    private String address = "";
-    private int noBedrooms = 0;
+    private String owner;
+    private String address;
+    private int noBedrooms;
 
 
     //public constructor from fields
-    public House(String owner, String address, String noBedrooms) {
+    public House(String owner, String address, int noBedrooms) {
         super();
-        if (!owner.isEmpty()) {
+
+        //uses jsp default values if input is null
+        if (owner.isEmpty()) {
             this.owner = null;
+        } else {
+            this.owner = owner;
         }
-        if (!address.isEmpty()) {
+
+        if (address.isEmpty()) {
             this.address = null;
+        } else {
+            this.address = address;
         }
-        if (!noBedrooms.isEmpty()) {
-            try {
-                this.noBedrooms = Integer.parseInt(noBedrooms);
-            } catch (NumberFormatException nfe) {
-                System.err.println(nfe.getMessage());
-                this.noBedrooms = 0;
-            }
-        }
+
+        this.noBedrooms = noBedrooms;
     }
 
     //public setters and getters
