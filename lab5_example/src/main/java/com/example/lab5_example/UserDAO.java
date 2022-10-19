@@ -1,33 +1,10 @@
 package com.example.lab5_example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public enum UserDAO {
     instance;
-
-    List<User> users;
-
-    private UserDAO() {
-        users = new ArrayList<User>(3);
-
-        User user1 = new User("Paul", "Athlone");
-        users.add(user1);
-
-        User user2 = new User("Johnny", "New York");
-        users.add(user2);
-
-        User user3 = new User("Clementine", "Dublin");
-        users.add(user3);
-    }
-
-    public List<User> list() {
-        return users;
-    }
-
 
     //database options
     public Connection getConnection() throws Exception {
@@ -56,5 +33,20 @@ public enum UserDAO {
 
         //execute the statement
         psmt.executeUpdate();
+    }
+
+    public ArrayList<User> list() throws Exception{
+
+        ArrayList<User> userList = new ArrayList<>();
+        Connection con = getConnection();
+
+        Statement stmt = con.createStatement();
+
+        ResultSet rs = stmt.executeQuery("SELECT  * FROM USER");
+
+        while (rs.next()) {
+            User user = new User("name", rs.getString("name"), rs.getString("address"));
+        }
+        return userList;
     }
 }
