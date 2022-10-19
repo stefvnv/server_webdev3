@@ -20,10 +20,9 @@
         </div>
         <div class="w3-margin">
             <c:forEach items="${houseList}" var="house">
-                <c:out value="${house.owner}"/>
-                <c:out value="${house.address}"/>
-                <c:out value="${house.noBedrooms}"/>
-                <br>
+                <b><c:out value="${house.owner},"/></b>
+                <i><c:out value="${house.address},"/></i>
+                <c:out value="${house.noBedrooms} bedroom/s"/><br>  <br>
             </c:forEach>
         </div>
     </div>
