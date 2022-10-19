@@ -1,4 +1,4 @@
-<%-- Part 2--%>
+<%-- Part B--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -8,7 +8,7 @@
 
 <header>
     <div class="w3-bar w3-border w3-pale-red w3-padding-small" style="width: 100%;">
-        <h2>Houses - showHouse.jsp</h2>
+        <h2>Houses - showList.jsp</h2>
     </div>
 </header>
 
