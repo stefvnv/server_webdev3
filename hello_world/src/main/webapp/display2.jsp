@@ -7,10 +7,7 @@
     <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="Controller1">
-    <input type="text" name="userName"/>
-    <input type="submit" value="here we go...."/>
-</form>
-
+last page which still has the session info....
+${sessionScope.user}
 </body>
 </html>

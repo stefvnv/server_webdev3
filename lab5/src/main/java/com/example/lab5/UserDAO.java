@@ -1,4 +1,4 @@
-package com.example.lab5_example;
+package com.example.lab5;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +12,8 @@ public enum UserDAO {
         Class.forName("org.hsqldb.jdbcDriver");
 
         //get connection from DriverManager
+
+        //used by save, list, update, delete methods
         Connection con;
         con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/oneDB", "sa", "");
         return con;
@@ -36,17 +38,15 @@ public enum UserDAO {
     }
 
     public ArrayList<User> list() throws Exception{
+        ArrayList<User> listOfUsers = new ArrayList();
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
+        while (rs.next()) {
+            User u = new User( rs.getString("name"), rs.getString("address"));
+            listOfUsers.add(u);
 
-        ArrayList<User> userList = new ArrayList<>();
-        Connection con = getConnection();
-
-        Statement stmt = con.createStatement();
-
-        ResultSet rs = stmt.executeQuery("SELECT  * FROM USER");
-
-        //while (rs.next()) {
-        //    User user = new User("name", rs.getString("name"), rs.getString("address"));
-        //}
-        return userList;
+        }
+        return listOfUsers;
     }
 }

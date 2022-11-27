@@ -7,10 +7,11 @@
     <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="Controller1">
-    <input type="text" name="userName"/>
-    <input type="submit" value="here we go...."/>
-</form>
+just a page to test that this works.....
 
+${sessionScope.user}
+<form method="post" action="Controller2">
+    <input type="submit" value="click here"/>
+</form>
 </body>
 </html>
