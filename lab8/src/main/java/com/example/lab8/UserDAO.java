@@ -5,9 +5,7 @@ import java.sql.*;
 public enum UserDAO {
     instance;
 
-
-    public static User checkLogin(String name, String password){
-
+    public static User checkLogin(String name, String password) {
         return null;
     }
 
@@ -25,7 +23,27 @@ public enum UserDAO {
     }
 
 
+    public User selectOne(String name) throws Exception {
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM USER where name ='" + name + "'");
+        while (rs.next()) {
+            if (rs.getString("email").equals(name)) {
+
+                User u = new User(rs.getString("email"), rs.getString("name"), "blank");
+                return u;
+            }
+
+        }
+        return null;
+    }
+
+
     //get a connection to the database and insert new user
+
+    /**
+     * CREATE
+     */
     public void save(User user) throws Exception {
 
         //get the connection
@@ -42,5 +60,33 @@ public enum UserDAO {
 
         //execute the statement
         psmt.executeUpdate();
+    }
+
+
+    /**
+     * DELETE
+     */
+    public boolean deleteUser(String name) throws Exception {
+
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        User u = selectOne(name);
+        String n = u.getName();
+
+        //if doing database correctly (foreign keys, link table between user/books etc)
+        //only one query needed - removing user from user table will remove all of their objects
+        //from the other tables.
+
+        //however.... if choose to not create database with Normalization, you will need 2 queries
+        //one to delete from each table individually like so.....
+        //deleting user from user table
+        int rs = stmt.executeUpdate("DELETE FROM USER where name = '" + name + "'");
+        //deleting books from books table using name....
+        int rs2 = stmt.executeUpdate("DELETE FROM Books where name = '" + n + "'");
+        System.out.println(rs);
+        if (rs > 0) {
+            return true;
+        }
+        return false;
     }
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class checkCookie
  */
-@WebServlet("/checkCookie")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -50,46 +50,46 @@ public class LoginServlet extends HttpServlet {
             //set attribute user
             session.setAttribute("user", name);
 
-
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-
-
 
 
         /**
-        //create variables
-        String name = null;
-        String password = null;
+         //create variables
+         String name = null;
+         String password = null;
 
-        for (int i = 0; i < cookies.length; i++) {
+         for (int i = 0; i < cookies.length; i++) {
 
-            System.out.println("cookie " + i);
-            System.out.println(cookies[i].getName());
-            System.out.println(cookies[i].getValue());
+         System.out.println("cookie " + i);
+         System.out.println(cookies[i].getName());
+         System.out.println(cookies[i].getValue());
 
-            if (cookies[i].getName().equals("name")) {
-                userExists = true;
+         if (cookies[i].getName().equals("name")) {
+         userExists = true;
 
-                //set values
-                name = cookies[i].getValue();
-            }
-        }
-        if (userExists) {
-            System.out.print("cookie name exists... value is: ");
-            System.out.println(name);
-            System.out.println("setting attribute...");
+         //set values
+         name = cookies[i].getValue();
+         }
+         }
+         if (userExists) {
+         System.out.print("cookie name exists... value is: ");
+         System.out.println(name);
+         System.out.println("setting attribute...");
 
-            //set request attribute
-            request.setAttribute("name", name);
+         //set request attribute
+         request.setAttribute("name", name);
 
-            System.out.println("calling display.jsp");
+         System.out.println("calling display.jsp");
 
-            //data gets dispatched here
-            request.getRequestDispatcher("hello.jsp").forward(request, response);
-        } else {
+         //data gets dispatched here
+         request.getRequestDispatcher("hello.jsp").forward(request, response);
+         } else {
 
-            //data gets dispatched here
-            request.getRequestDispatcher("enterName.jsp").forward(request, response);
-        }**/
+         //data gets dispatched here
+         request.getRequestDispatcher("enterName.jsp").forward(request, response);
+         }**/
     }
 }

@@ -7,6 +7,8 @@
 <body>
 
 <!--Register.jsp-->
+Hello, ${sessionScope.user}
+
 <form method="post" action="register.jsp">
     <input type="submit" value="Register">
 </form>
