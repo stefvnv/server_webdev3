@@ -4,12 +4,11 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Sign up or Login</title>
 </head>
 <body>
-<form method="post" action="Servlet1">
-    Name: <input type="text" name="name"/> <br>
-    Address: <input type="text" name="address"/> <br>
+<form method="post" action="MainServlet">
+    Sign up/login: <input type="text" name="name"/> <br>
     <input type="submit" value="Next"/>
 </form>
 <br><br><br><br>

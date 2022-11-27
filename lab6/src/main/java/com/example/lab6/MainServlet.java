@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class checkCookie
  */
 @WebServlet("/checkCookie")
-public class checkCookie extends HttpServlet {
+public class MainServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public checkCookie() {
+    public MainServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -36,12 +35,12 @@ public class checkCookie extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         Cookie[] cookies = request.getCookies();
         Boolean userExists = false;
 
         //create variables
         String name = null;
+
         for (int i = 0; i < cookies.length; i++) {
 
             System.out.println("cookie " + i);
@@ -65,15 +64,12 @@ public class checkCookie extends HttpServlet {
 
             System.out.println("calling display.jsp");
 
-            //data gets outputted here
-            request.getRequestDispatcher("printData.jsp").forward(request, response);
-            //doGet(request, response);
+            //data gets dispatched here
+            request.getRequestDispatcher("hello.jsp").forward(request, response);
         } else {
 
-            //data gets gathered from here
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            request.getRequestDispatcher("gatherData1.jsp").forward(request, response);
-            request.getRequestDispatcher("gatherData1.jsp").forward(request, response);
+            //data gets dispatched here
+            request.getRequestDispatcher("enterName.jsp").forward(request, response);
         }
     }
 }
