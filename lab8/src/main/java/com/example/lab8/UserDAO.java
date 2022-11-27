@@ -5,6 +5,13 @@ import java.sql.*;
 public enum UserDAO {
     instance;
 
+
+    public static User checkLogin(String name, String password){
+
+        return null;
+    }
+
+
     //database options
     public Connection getConnection() throws Exception {
 

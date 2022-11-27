@@ -10,8 +10,8 @@
 <form method="post" action="LoginServlet">
     Enter name: <input type="text" name="name"><br>
 
-    Enter address: <input type="text" name="address"><br>
-    <input type="submit" value="Submit user form">
+    Enter password: <input type="text" name="password"><br>
+    <input type="submit" value="Continue">
 </form>
 </body>
 </html>
