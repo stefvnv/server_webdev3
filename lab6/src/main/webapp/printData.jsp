@@ -9,15 +9,14 @@
 </head>
 <body>
 
-<p>Hello <c:out value = "${name}"/></p>
-<p>Your address is <c:out value = "${address}"/></p> <br>
+<p>Hello ${param.name}</p>
+<p>Your address is ${param.address}</p> <br>
 
-<p>Your credit card number is <c:out value = "${creditCardNumber}"/></p>
-<p>and has an expiry date of <c:out value = "${expiryDate}"/></p> <br>
+<p>Your credit card number is ${param.creditCardNumber}</p>
+<p>and has an expiry date of ${param.expiryDate}</p> <br>
 
-<p>Address: <c:out value = "${addressLine1},"/></p>
-<c:out value = "${addressLine2}"/>
-
+<p>Address: ${param.addressLine1}, ${param.addressLine2}</p>
+${param.addressLine2}
 
 </body>
 </html>

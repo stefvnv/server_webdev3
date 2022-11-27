@@ -7,7 +7,7 @@
     <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="gatherData1.jsp">
+<form method="post" action="Servlet1">
     Name: <input type="text" name="name"/> <br>
     Address: <input type="text" name="address"/> <br>
     <input type="submit" value="Next"/>
