@@ -1,39 +1,66 @@
 package com.example.project;
 
 public class User {
-    private String email;
 
+    // create user variables
     private String name;
-    private String address;
+    private String email;
+    private String password;
 
-    public User(String e, String n, String a) {
-        this.email = e;
-        this.name = n;
-        this.address = a;
+    /**
+     * Constructor
+     */
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
+
+    /**
+     * Returns users name
+     */
+    public String getName() {
+        return name;
+    }
+
+
+    /**
+     * Sets users name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    /**
+     * Returns users email
+     */
     public String getEmail() {
         return email;
     }
 
+
+    /**
+     * Sets users email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getName() {
-        return this.name;
+
+    /**
+     * Returns users password
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public String getAddress() {
-        return this.address;
-    }
 
-    public void setName(String n) {
-        this.name = n;
+    /**
+     * Sets users password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-    public void setAddress(String a) {
-        this.address = a;
-    }
-
 }

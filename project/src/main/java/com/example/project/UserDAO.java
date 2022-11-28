@@ -10,8 +10,9 @@ import java.util.ArrayList;
 public enum UserDAO {
     instance;
 
-
-
+    /**
+     *
+     */
     public Connection getConnection() throws Exception {
         Class.forName("org.hsqldb.jdbcDriver");
 
@@ -27,7 +28,10 @@ public enum UserDAO {
     //Update - Update - update
     //Delete - Delete - remove
 
-    //Create
+    /**
+     * CREATE
+     * Saves user to database
+     */
     public void saveUser(User u) throws Exception {
         Connection conn = getConnection();
         PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER_INFO(email, name) VALUES (?,?)");
@@ -58,7 +62,10 @@ public enum UserDAO {
     //update
 
 
-    //Delete
+    /**
+     * DELETE
+     * Deletes user from database
+     */
     public boolean deleteUser(String email) throws Exception{
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
@@ -83,8 +90,9 @@ public enum UserDAO {
     }
 
 
-
-
+    /**
+     *
+     */
     public ArrayList<User> list() throws Exception {
         ArrayList<User> listOfUsers = new ArrayList();
         Connection conn = getConnection();
@@ -93,7 +101,6 @@ public enum UserDAO {
         while (rs.next()) {
             User u = new User("blank", rs.getString("name"), rs.getString("address"));
             listOfUsers.add(u);
-
         }
         return listOfUsers;
     }
