@@ -1,3 +1,10 @@
+/**
+ * Model
+ * User
+ * Stefana Chiritescu
+ * A00282343
+ */
+
 package com.example.project;
 
 public class User {
@@ -8,10 +15,19 @@ public class User {
     private String password;
 
     /**
-     * Constructor
+     * Constructor for email and password
      */
     public User(String name, String email, String password) {
         this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+
+    /**
+     * Constructor for email and password
+     */
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }

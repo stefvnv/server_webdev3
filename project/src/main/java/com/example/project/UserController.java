@@ -1,3 +1,9 @@
+/**
+ * Controller - UserController
+ * Stefana Chiritescu
+ * A00282343
+ */
+
 package com.example.project;
 
 import java.io.IOException;
@@ -5,58 +11,105 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 /**
  * Servlet implementation class UserController
  */
 @WebServlet("/UserController")
 public class UserController extends HttpServlet {
+
+    //create variables
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
 
     /**
-     * @see HttpServlet#HttpServlet()
+     *
      */
     public UserController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     *
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
+
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     *
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        String email = request.getParameter("userEmail");
-        String n = request.getParameter("userName");
-        String address = request.getParameter("userAddress");
 
-        User u1 = new User(email, n, address);
+        //gets user parameters
+        //String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
+        //create a new user model (domain object)
+        User user = new User (email, password);
+
+        Cookie[] cookies = request.getCookies();
+        Boolean userExists = false;
+
+        String name = null;
+        for (int i = 0; i < cookies.length; i++) {
+
+            System.out.println("cookie " + i);
+            System.out.println(cookies[i].getName());
+            System.out.println(cookies[i].getValue());
+
+            if (cookies[i].getName().equals("name")) {
+                userExists = true;
+
+                //set values
+                name = cookies[i].getValue();
+            }
+        }
+        if (userExists) {
+            System.out.print("cookie name exists... value is: ");
+            System.out.println(name);
+            System.out.println("setting attribute...");
+
+            //set request attribute
+            request.setAttribute("name", name);
+
+            System.out.println("calling display.jsp");
+
+            //data gets outputted here
+            request.getRequestDispatcher("showGrades.jsp").forward(request, response);
+
+        } else {
+            //data gets gathered from here
+            request.getRequestDispatcher("signUp.jsp").forward(request, response);
+
+        }
+
+
+        /**
         try {
-            ArrayList<User> users = UserDAO.instance.list();
-            //UserDAO.instance.save(u1);
+            //ArrayList<User> users = UserDAO.instance.list();
+            //save user to database by calling method in DAO
+            //UserDAO.instance.save(user);
             //String check = "mcurran@ait.ie";
             //User user = UserDAO.instance.selectOne(check);
             //System.out.println(u1.getName());
-            request.setAttribute("userList", users);
-            request.getRequestDispatcher("showUser.jsp").forward(request, response);
+            //request.setAttribute("userList", users);
+
+            //get session
+            HttpSession session = request.getSession();
+
+            session.setAttribute("user", user);
+
+            request.getRequestDispatcher("showGrades.jsp").forward(request, response);
         } catch (Exception e) {
-            System.out.println("information could not be retrieved");
-            // TODO Auto-generated catch block
-            //e.printStackTrace();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            System.out.println("User does not exist, going to Sign Up page.");
+
+            //forward the updated request and response to sign up page
+            request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
 
 
@@ -69,8 +122,5 @@ public class UserController extends HttpServlet {
             System.out.println("nope doesn't exist!");
         }
          **/
-
-
-
     }
 }

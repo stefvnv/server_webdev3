@@ -11,7 +11,7 @@ public enum UserDAO {
     instance;
 
     /**
-     *
+     * Connects to database
      */
     public Connection getConnection() throws Exception {
         Class.forName("org.hsqldb.jdbcDriver");
@@ -20,6 +20,12 @@ public enum UserDAO {
                 "jdbc:hsqldb:hsql://localhost/projectExampleDatabase", "sa", "");
 
         return con;
+    }
+
+    public static User checkLogin(String name, String password){
+
+        return null;
+
     }
 
     //CRUD
@@ -32,7 +38,7 @@ public enum UserDAO {
      * CREATE
      * Saves user to database
      */
-    public void saveUser(User u) throws Exception {
+    public void save(User u) throws Exception {
         Connection conn = getConnection();
         PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER_INFO(email, name) VALUES (?,?)");
 
