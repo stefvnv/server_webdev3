@@ -46,19 +46,17 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //gets user parameters
-        //String name = request.getParameter("name");
+        String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        System.out.println(request.getParameter("email"));
 
-        //create a new user model (domain object)
-        User user = new User (email, password);
+
 
         boolean userExists = false;
 
         Cookie[] cookies = request.getCookies();
 
-        String name = null;
+        String cookieName = null;
         for (int i = 0; i < cookies.length; i++) {
 
             System.out.println("cookie " + i);
@@ -69,7 +67,7 @@ public class UserController extends HttpServlet {
                 userExists = true;
 
                 //set values
-                name = cookies[i].getValue();
+                cookieName = cookies[i].getValue();
             }
         }
 
@@ -78,58 +76,30 @@ public class UserController extends HttpServlet {
             System.out.println(name);
             System.out.println("setting attribute...");
 
-            //set request attribute
-            //request.setAttribute("name", name);
-
             //get session
             HttpSession session = request.getSession();
 
-            //set the attribute user
-            session.setAttribute("user", email);
+            //create a new user model (domain object)
+            User user = UserDAO.checkLogin(email, password);
 
-            //data gets outputted here
-            request.getRequestDispatcher("showGrades.jsp").forward(request, response);
+            //set the attribute user
+            session.setAttribute("user", user);
+
+            getGrades(user, request, response);
+
 
         } else {
             //data gets gathered from here
             request.getRequestDispatcher("signUp.jsp").forward(request, response);
+        }
+    }
+
+    private void getGrades(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Grade grade = GradeDAO.checkGradeValidity(user){
 
         }
 
-
-        /**
-        try {
-            //ArrayList<User> users = UserDAO.instance.list();
-            //save user to database by calling method in DAO
-            //UserDAO.instance.save(user);
-            //String check = "mcurran@ait.ie";
-            //User user = UserDAO.instance.selectOne(check);
-            //System.out.println(u1.getName());
-            //request.setAttribute("userList", users);
-
-            //get session
-            HttpSession session = request.getSession();
-
-            session.setAttribute("user", user);
-
-            request.getRequestDispatcher("showGrades.jsp").forward(request, response);
-        } catch (Exception e) {
-
-            System.out.println("User does not exist, going to Sign Up page.");
-
-            //forward the updated request and response to sign up page
-            request.getRequestDispatcher("signUp.jsp").forward(request, response);
-        }
-
-
-        /**
-        //delete user
-        Boolean deleted = UserDAO.instance.deleteUser("Martina");
-        if(deleted == true) {
-            System.out.println("deleted");
-        }else {
-            System.out.println("nope doesn't exist!");
-        }
-         **/
+        //data gets outputted here
+        request.getRequestDispatcher("showGrades.jsp").forward(request, response);
     }
 }

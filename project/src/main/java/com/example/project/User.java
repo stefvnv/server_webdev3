@@ -9,7 +9,6 @@ package com.example.project;
 public class User {
 
     // create user variables
-    private int id;
     private String name;
     private String email;
     private String password;
@@ -32,21 +31,6 @@ public class User {
         this.password = password;
     }
 
-
-    /**
-     * Returns users name
-     */
-    public int getID() {
-        return id;
-    }
-
-
-    /**
-     * Sets users name
-     */
-    public void setID(int id) {
-        this.id = id;
-    }
 
 
     /**

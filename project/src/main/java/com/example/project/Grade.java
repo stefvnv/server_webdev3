@@ -9,7 +9,7 @@ package com.example.project;
 public class Grade {
 
     //create grade variables
-    private String id;
+    private String key; // year+email+module
     private String year;
     private String module;
     private String grade;
@@ -18,7 +18,7 @@ public class Grade {
      * Constructor
      */
     public Grade(String id, String year, String module, String grade){
-        this.id = id;
+        this.key = id;
         this.year = year;
         this.module = module;
         this.grade = grade;
@@ -28,12 +28,12 @@ public class Grade {
     /**
      * Returns grades ID (users email)
      */
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
 
