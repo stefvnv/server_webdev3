@@ -11,10 +11,12 @@ password VARCHAR(32) NOT NULL
 );
 
 <!-- for creating grade table -->
-CREATE TABLE GRADES
+
+CREATE TABLE GRADE
 (
 id INTEGER IDENTITY,
 year VARCHAR(32) NOT NULL,
 module VARCHAR(32) NOT NULL,
-grade VARCHAR(32) NOT NULL
+grade VARCHAR(32) NOT NULL,
+email VARCHAR(32) NOT NULL
 );

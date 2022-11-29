@@ -95,10 +95,11 @@ public class UserController extends HttpServlet {
     }
 
     private void getGrades(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Grade grade = GradeDAO.checkGradeValidity(user){
-
+       if(GradeDAO.checkGradeValidity(user) == null){
+           ArrayList<Grade> grades = GradeDAO.checkGradeValidity(user);
+        }else{
+           request.getRequestDispatcher("addGrade.jsp").forward(request, response);
         }
-
         //data gets outputted here
         request.getRequestDispatcher("showGrades.jsp").forward(request, response);
     }
