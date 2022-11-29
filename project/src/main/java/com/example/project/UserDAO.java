@@ -1,10 +1,6 @@
 package com.example.project;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public enum UserDAO {
@@ -13,16 +9,36 @@ public enum UserDAO {
     /**
      * Connects to database
      */
-    public Connection getConnection() throws Exception {
-        Class.forName("org.hsqldb.jdbcDriver");
-
-        Connection con = DriverManager.getConnection(
-                "jdbc:hsqldb:hsql://localhost/projectExampleDatabase", "sa", "");
-
-        return con;
+    public static Connection getConnection(){
+        try {
+            Class.forName("org.hsqldb.jdbcDriver");
+            return DriverManager.getConnection(
+                    "jdbc:hsqldb:hsql://localhost/oneDB", "sa", "");
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static User checkLogin(String name, String password){
+    /**
+     * Checks if user attempting to login exists in database
+     */
+    public static User checkLogin(String email, String password){
+        Connection conn = getConnection();
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM USER where email ='" + email + "'");
+            while (rs.next()) {
+                if (rs.getString("password").equals(password)){
+                    return new User(rs.getString("name"), rs.getString("email"), rs.getString("password"));
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
 
         return null;
 
@@ -40,10 +56,12 @@ public enum UserDAO {
      */
     public void save(User u) throws Exception {
         Connection conn = getConnection();
-        PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER_INFO(email, name) VALUES (?,?)");
+        PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER(name, email, password) VALUES (?,?,?)");
 
-        psmt.setString(1, u.getEmail());
-        psmt.setString(2, u.getName());
+        psmt.setString(1, u.getName());
+        psmt.setString(2, u.getEmail());
+        psmt.setString(3, u.getPassword());
+
         psmt.executeUpdate();
         psmt.close();
         conn.close();
@@ -53,7 +71,7 @@ public enum UserDAO {
     public User selectOne(String email) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM USER_INFO where email ='" + email + "'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM USER where email ='" + email + "'");
         while (rs.next()) {
 
             if (rs.getString("email").equals(email)) {
@@ -72,7 +90,7 @@ public enum UserDAO {
      * DELETE
      * Deletes user from database
      */
-    public boolean deleteUser(String email) throws Exception{
+    public boolean deleteUser(String email) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
         User u = selectOne(email);
@@ -85,11 +103,11 @@ public enum UserDAO {
         //however.... if choose to not create database with Normalization, you will need 2 queries
         //one to delete from each table individually like so.....
         //deleting user from user table
-        int rs = stmt.executeUpdate("DELETE FROM USER where email= '" +email + "'");
+        int rs = stmt.executeUpdate("DELETE FROM USER where email= '" + email + "'");
         //deleting books from books table using name....
-        int rs2 = stmt.executeUpdate("DELETE FROM Books where name= '" + n +"'");
+        int rs2 = stmt.executeUpdate("DELETE FROM Books where name= '" + n + "'");
         System.out.println(rs);
-        if(rs>0){
+        if (rs > 0) {
             return true;
         }
         return false;

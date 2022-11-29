@@ -3,7 +3,7 @@
 
     <property name="path.to.hsqldb.jar" value="../lib"/>
     <property name="path.to.db" value="."/>
-    <property name="db.name" value="projectExampleDatabase"/>
+    <property name="db.name" value="oneDB"/>
     <property name="user.id" value="sa"/>
     <property name="user.pwd" value=""/>
 

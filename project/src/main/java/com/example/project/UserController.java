@@ -54,8 +54,9 @@ public class UserController extends HttpServlet {
         //create a new user model (domain object)
         User user = new User (email, password);
 
-        Cookie[] cookies = request.getCookies();
         boolean userExists = false;
+
+        Cookie[] cookies = request.getCookies();
 
         String name = null;
         for (int i = 0; i < cookies.length; i++) {
@@ -71,15 +72,20 @@ public class UserController extends HttpServlet {
                 name = cookies[i].getValue();
             }
         }
-        if (userExists) {
+
+        if (UserDAO.checkLogin(email, password) != null) {
             System.out.print("cookie name exists... value is: ");
             System.out.println(name);
             System.out.println("setting attribute...");
 
             //set request attribute
-            request.setAttribute("name", name);
+            //request.setAttribute("name", name);
 
-            System.out.println("calling display.jsp");
+            //get session
+            HttpSession session = request.getSession();
+
+            //set the attribute user
+            session.setAttribute("user", email);
 
             //data gets outputted here
             request.getRequestDispatcher("showGrades.jsp").forward(request, response);

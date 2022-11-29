@@ -30,5 +30,6 @@ public class CreateUserServlet extends HttpServlet {
 
         //forward the updated request and response to out ShowUser View
         request.getRequestDispatcher("showUser.jsp").forward(request, response);
+
     }
 }
