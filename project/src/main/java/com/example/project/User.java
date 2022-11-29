@@ -1,6 +1,5 @@
 /**
- * Model
- * User
+ * Model - User
  * Stefana Chiritescu
  * A00282343
  */
@@ -10,6 +9,7 @@ package com.example.project;
 public class User {
 
     // create user variables
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -30,6 +30,22 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+
+    /**
+     * Returns users name
+     */
+    public int getID() {
+        return id;
+    }
+
+
+    /**
+     * Sets users name
+     */
+    public void setID(int id) {
+        this.id = id;
     }
 
 

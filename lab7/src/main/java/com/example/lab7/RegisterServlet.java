@@ -26,18 +26,20 @@ public class RegisterServlet extends HttpServlet {
         //create a new user model (domain object)
         User user = new User (name, password, address);
 
+        System.out.println("hereee");
 
-        //add the model as an attribute in the request
-        request.setAttribute("user", user);
-
-        //save user
-        try {
-            UserDAO.instance.save(user);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        //forward the updated request and response to out back to index
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+//
+//        //add the model as an attribute in the request
+//        request.setAttribute("user", user);
+//
+//        //save user
+//        try {
+//            UserDAO.instance.save(user);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        //forward the updated request and response to out back to index
+//        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

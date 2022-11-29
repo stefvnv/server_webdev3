@@ -16,7 +16,7 @@ import javax.servlet.http.*;
 /**
  * Servlet implementation class UserController
  */
-@WebServlet("/UserController")
+@WebServlet(name = "UserController", value = "/UserController")
 public class UserController extends HttpServlet {
 
     //create variables
@@ -33,6 +33,7 @@ public class UserController extends HttpServlet {
     /**
      *
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
     }
@@ -41,18 +42,20 @@ public class UserController extends HttpServlet {
     /**
      *
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //gets user parameters
         //String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        System.out.println(request.getParameter("email"));
 
         //create a new user model (domain object)
         User user = new User (email, password);
 
         Cookie[] cookies = request.getCookies();
-        Boolean userExists = false;
+        boolean userExists = false;
 
         String name = null;
         for (int i = 0; i < cookies.length; i++) {
@@ -61,7 +64,7 @@ public class UserController extends HttpServlet {
             System.out.println(cookies[i].getName());
             System.out.println(cookies[i].getValue());
 
-            if (cookies[i].getName().equals("name")) {
+            if (cookies[i].getName().equals("email")) {
                 userExists = true;
 
                 //set values

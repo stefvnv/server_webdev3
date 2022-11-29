@@ -1,6 +1,5 @@
 /**
- * Model
- * Grade
+ * Model - Grade
  * Stefana Chiritescu
  * A00282343
  */

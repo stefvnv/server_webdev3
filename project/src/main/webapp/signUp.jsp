@@ -27,7 +27,7 @@ A00282343
             <h3>Sign Up</h3>
         </div>
 
-        <form class="w3-container">
+        <div class="w3-container">
             <label>Name</label>
             <label>
                 <input class="w3-input" type="text" name="name">
@@ -46,7 +46,7 @@ A00282343
                 <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%; margin:auto" type="submit"
                        value="Sign Up">
             </div>
-        </form>
+        </div>
     </div>
 </form>
 
