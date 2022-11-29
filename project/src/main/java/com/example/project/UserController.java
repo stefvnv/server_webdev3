@@ -8,6 +8,7 @@ package com.example.project;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -95,8 +96,12 @@ public class UserController extends HttpServlet {
     }
 
     private void getGrades(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       if(GradeDAO.checkGradeValidity(user) == null){
-           ArrayList<Grade> grades = GradeDAO.checkGradeValidity(user);
+       if(GradeDAO.checkGradeValidity(user) != null){
+           ArrayList<Grade> gradesList = GradeDAO.checkGradeValidity(user);
+
+           //add the model as an attribute in the request
+           request.setAttribute("gradesList", gradesList);
+           System.out.println(gradesList.get(0).getModule());
         }else{
            request.getRequestDispatcher("addGrade.jsp").forward(request, response);
         }

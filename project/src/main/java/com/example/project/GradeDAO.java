@@ -16,15 +16,16 @@ public enum GradeDAO {
         try {
             stmt = conn.createStatement();
             ArrayList<Grade> gradesToReturn = new ArrayList<>();
+            //System.out.println("user email is " + user.getEmail());
             ResultSet rs = stmt.executeQuery("SELECT * FROM GRADE where email ='" + user.getEmail() + "'");
             while (rs.next()) {
-                if (rs.getString("email").equals(user.getPassword())) {
-                    gradesToReturn.add(new Grade(rs.getString("year"), rs.getString("module"), rs.getString("grade"), rs.getString("email")));
-                }
+                gradesToReturn.add(new Grade(rs.getString("year"), rs.getString("module"), rs.getString("grade"), rs.getString("email")));
             }
-            if(gradesToReturn.isEmpty()){
+            if (gradesToReturn.isEmpty()) {
+                System.out.println("its empty");
                 return null;
             }
+            System.out.println(gradesToReturn.get(0).getEmail());
             System.out.println("grades " + gradesToReturn);
             return gradesToReturn;
 

@@ -44,7 +44,7 @@ A00282343
             </label>
 
             <label>
-                <input class="w3-input" type="hidden" name="email" value="$sessionScope.user.email">
+                <input class="w3-input" type="hidden" name="email" value="${sessionScope.user.email}">
             </label>
             <div class="w3-margin">
                 <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%; margin:auto" type="submit"
