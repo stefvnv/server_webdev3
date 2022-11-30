@@ -35,7 +35,7 @@ A00282343
         <div class="w3-container">
             <label>Email</label>
             <label>
-                <input class="w3-input" type="text" name="email">
+                <input class="w3-input" type="email" name="email">
             </label>
 
             <label>Password</label>

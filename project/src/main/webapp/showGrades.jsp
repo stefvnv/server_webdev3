@@ -14,22 +14,27 @@ A00282343
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <header class="w3-bar w3-pale-red w3-padding-small" style="width: 100%">
-    <div style="float: left; width: 85%; font-weight: bold">
+    <div style="float: left; width: 70%; font-weight: bold">
         <h2 style="font-weight: bold">Grade Manager - Your Grades</h2>
     </div>
 
     <div style="float: right; width: 15%">
+        <form method="post" action="UserController">
+            <input class="w3-input w3-red w3-round-xlarge" style="" type="submit" name="delete" value="Delete User">
+        </form>
+    </div>
+
+    <div style="float: right; width: 15%">
         <form method="post" action="LogoutServlet">
-            <input class="w3-input w3-dark-gray w3-round-xlarge" style="" type="submit" value="Login">
+            <input class="w3-input w3-dark-gray w3-round-xlarge" style="" type="submit" value="Logout">
         </form>
     </div>
 </header>
 
 <!--body-->
 <body style="background-color:lavenderblush">
-
 <div class="w3-container">
-    <h4>Welcome, ${sessionScope.user.name}</h4>
+    <h4>Welcome, <i>${sessionScope.user.name}</i></h4>
 </div>
 
 <div style="padding: 4%; width: 60%; margin: auto;">
@@ -54,9 +59,9 @@ A00282343
                         <td>${grade.year}</td>
                         <td>${grade.module}</td>
                         <td><input class="w3-input" type="text" name="grade_row" value=${grade.grade}></td>
-                        <td><input class="w3-input w3-pale-red w3-round-xlarge" type="submit" name="update"
+                        <td><input class="w3-input w3-pale-green w3-round-xlarge" type="submit" name="update"
                                    value="Update" onclick="updatedFun()"></td>
-                        <td><input class="w3-input w3-pale-red w3-round-xlarge" type="submit" name="delete"
+                        <td><input class="w3-input w3-pale-green w3-round-xlarge" type="submit" name="delete"
                                    value="Delete"></td>
                         <input class="w3-input" type="hidden" name="current_row_index" value="${count}">
                         <input class="w3-input" type="hidden" name="current_row_year" value="${grade.year}">
@@ -71,7 +76,8 @@ A00282343
             </table>
 
             <form method="post" action="addGrade.jsp">
-                <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%" type="submit" value="Add Grade">
+                <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%; margin: auto " type="submit"
+                       value="Add Grade">
             </form>
 
             <script>

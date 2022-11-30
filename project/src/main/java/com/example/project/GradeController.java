@@ -53,12 +53,12 @@ public class GradeController extends HttpServlet {
         module = request.getParameter("current_row_module");
         email = currentUser.getEmail();
 
-        // UPDATE
+        //update
         if (request.getParameter("update") != null) {
             String newGrade;
             newGrade = request.getParameter("grade_row");
 
-
+            //calls update method in GradeDAO
             try {
                 assert gradesList != null;
                 GradeDAO.update(email, year, module, newGrade, gradesList.size());
@@ -66,12 +66,13 @@ public class GradeController extends HttpServlet {
                 throw new RuntimeException(e);
             }
 
-            // DELETE
+        //delete
         } else if (request.getParameter("delete") != null) {
 
             int indexToDelete = Integer.parseInt(request.getParameter("current_row_index"));
             assert gradesList != null;
-            ;
+
+            //calls delete method in GradeDAO
             try {
                 GradeDAO.delete(module, email, gradesList.size());
             } catch (Exception e) {
@@ -79,9 +80,8 @@ public class GradeController extends HttpServlet {
             }
         }
 
+        //
         request.setAttribute("gradesList", GradeDAO.checkGradeValidity(currentUser));
-
         request.getRequestDispatcher("showGrades.jsp").forward(request, response);
-
     }
 }

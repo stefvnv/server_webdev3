@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/SignUpServlet")
@@ -35,7 +36,11 @@ public class SignUpServlet extends HttpServlet {
         try {
             UserDAO.instance.save(user);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Email must be unique");
+            HttpSession session = request.getSession();
+            session.setAttribute("DUPLICATE_EMAIL", "true");
+
+            request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
 
         //forward the updated request and response to out back to index

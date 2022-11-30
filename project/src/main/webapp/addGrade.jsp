@@ -15,7 +15,7 @@ A00282343
 </head>
 <header>
     <div class="w3-bar w3-border w3-pale-red w3-padding-small" style="width: 100%;">
-        <h2 style="font-weight: bold">>Grade Manager - Add Grade</h2>
+        <h2 style="font-weight: bold">Grade Manager - Add Grade</h2>
     </div>
 </header>
 
@@ -24,7 +24,7 @@ A00282343
 <form method="post" action="AddGradeServlet" style="padding: 4%; width: 60%; margin: auto;">
     <div class="w3-card-4 w3-padding-small w3-round-xlarge">
         <div class="w3-container w3-pink w3-round-xlarge w3-center">
-            <h3>Add a new grade</h3>
+            <h3>ADD A NEW GRADE</h3>
         </div>
 
         <div class="w3-container">

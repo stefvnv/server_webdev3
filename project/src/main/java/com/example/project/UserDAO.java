@@ -92,20 +92,20 @@ public enum UserDAO {
      * DELETE
      * Deletes user from database
      */
-    public boolean delete(String email) throws Exception {
+    public static void delete(String email) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        User u = selectOne(email);
-        String n = u.getName();
+        //User u = selectOne(email);
+        //String n = u.getName();
+
+        System.out.println("trying to delete email " + email);
 
         int rs = stmt.executeUpdate("DELETE FROM USER where email= '" + email + "'");
-        //deleting books from books table using name....
-        int rs2 = stmt.executeUpdate("DELETE FROM Books where name= '" + n + "'");
-        System.out.println(rs);
-        if (rs > 0) {
-            return true;
-        }
-        return false;
+        System.out.println(rs + " record deleted in user");
+        rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + email + "'");
+        System.out.println(rs + " record deleted in grade");
+
+
     }
 
 

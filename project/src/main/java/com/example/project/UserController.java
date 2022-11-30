@@ -50,8 +50,6 @@ public class UserController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-
-
         boolean userExists = false;
 
         Cookie[] cookies = request.getCookies();
@@ -71,12 +69,27 @@ public class UserController extends HttpServlet {
             }
         }
 
-        if (UserDAO.checkLogin(email, password) != null) {
-            System.out.print("cookie name exists... value is: ");
-            System.out.println(name);
-            System.out.println("setting attribute...");
+        if (request.getParameter("delete") != null){
 
-            //get session
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("user");
+
+            email = currentUser.getEmail();
+
+            //calls delete method in UserDAO
+            try {
+                UserDAO.delete(email);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+        if (UserDAO.checkLogin(email, password) != null) {
+
+            //get Http session
             HttpSession session = request.getSession();
 
             //create a new user model (domain object)

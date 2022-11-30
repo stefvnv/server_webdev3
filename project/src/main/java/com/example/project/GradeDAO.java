@@ -5,9 +5,6 @@
  */
 
 package com.example.project;
-
-import org.apache.cxf.wsdl11.SOAPBindingUtil;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -74,11 +71,11 @@ public enum GradeDAO {
 
         if (listSize == 0) {
             int rs = stmt.executeUpdate("UPDATE GRADE SET Grade = '" + newGrade + "' WHERE year = '" + year + "' and module = '" + module + "'" + "and email = '" + email + "'");
-            System.out.println(rs + " record(s) updated");
+            System.out.println(rs + " record updated");
         }
         for (int i = 0; i < listSize; i++) {
             int rs = stmt.executeUpdate("UPDATE GRADE SET Grade = '" + newGrade + "' WHERE year = '" + year + "' and module = '" + module + "'" + "and email = '" + email + "'");
-            System.out.println(rs + " record(s) updated");
+            System.out.println(rs + " record updated");
         }
     }
 
@@ -94,12 +91,11 @@ public enum GradeDAO {
 
         if (listSize == 0) {
             int rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + deleteEmail + "'and module= '" + deleteMod + "'");
-            System.out.println(rs + " record(s) deleted");
+            System.out.println(rs + " record deleted");
         }
         for (int i = 0; i < listSize; i++) {
-            System.out.println("Deletting from grade where email = " + deleteEmail + " and module = " + deleteMod);
             int rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + deleteEmail + "'and module= '" + deleteMod + "'");
-            System.out.println(rs + " record(s) deleted");
+            System.out.println(rs + " record deleted");
         }
     }
 }
