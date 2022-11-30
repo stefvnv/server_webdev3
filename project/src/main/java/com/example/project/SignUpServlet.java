@@ -1,3 +1,9 @@
+/**
+ * Controller - SignUpServlet
+ * Stefana Chiritescu
+ * A00282343
+ */
+
 package com.example.project;
 
 import javax.servlet.ServletException;
@@ -10,13 +16,15 @@ import java.io.IOException;
 
 @WebServlet("/SignUpServlet")
 public class SignUpServlet extends HttpServlet {
-    private static final long serialVersionID = 1L;
 
+    //initialize variables
+    private static final long serialVersionID = 1L;
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,11 +35,14 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         //create a new user model (domain object)
-        User user = new User (name, email, password);
+        User user = new User(name, email, password);
 
         //add the model as an attribute in the request
         request.setAttribute("user", user);
+
+        //gets session
         HttpSession session = request.getSession();
+
         //save user
         try {
             UserDAO.instance.save(user);
@@ -42,10 +53,9 @@ public class SignUpServlet extends HttpServlet {
 
             request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
-
-
         session.setAttribute("DUPLICATE_EMAIL", "false");
-        //forward the updated request and response to out back to index
+
+        //forwards the updated request and response to out back to index
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

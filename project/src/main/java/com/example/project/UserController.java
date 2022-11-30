@@ -14,9 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-/**
- * Servlet implementation class UserController
- */
+
 @WebServlet(name = "UserController", value = "/UserController")
 public class UserController extends HttpServlet {
 
@@ -24,6 +22,7 @@ public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
     private User user;
+
 
     /**
      * Constructor
@@ -39,9 +38,6 @@ public class UserController extends HttpServlet {
     }
 
 
-    /**
-     *
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -50,30 +46,32 @@ public class UserController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        //set cookie variables
         boolean userExists = false;
-
         Cookie[] cookies = request.getCookies();
-
         String cookieName = null;
+
         for (int i = 0; i < cookies.length; i++) {
 
-            System.out.println("cookie " + i);
-            System.out.println(cookies[i].getName());
-            System.out.println(cookies[i].getValue());
-
+            //if user is stored in cookie using email, sets boolean to true
             if (cookies[i].getName().equals("email")) {
                 userExists = true;
 
-                //set values
+                //set cookie values
                 cookieName = cookies[i].getValue();
             }
         }
 
-        if (request.getParameter("delete") != null){
+        //delete
+        if (request.getParameter("delete") != null) {
 
+            //gets session
             HttpSession session = request.getSession();
+
+            //stores current user in user object
             User currentUser = (User) session.getAttribute("user");
 
+            //gets current users email
             email = currentUser.getEmail();
 
             //calls delete method in UserDAO
@@ -84,8 +82,6 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
-
-
 
         if (UserDAO.checkLogin(email, password) != null) {
 
@@ -98,10 +94,11 @@ public class UserController extends HttpServlet {
             //set the attribute user
             session.setAttribute("user", user);
 
+            //calls get grades method in AddGradeServlet
             AddGradeServlet.getGrades(user, request, response);
 
-
         } else {
+
             //data gets gathered from here
             request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }

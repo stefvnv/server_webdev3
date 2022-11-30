@@ -19,7 +19,6 @@ A00282343
 </header>
 
 
-
 <!--body-->
 <body onload="duplicateCheck()" style="background-color:lavenderblush">
 <form method="post" action="SignUpServlet" style="padding: 4%; width: 60%; margin: auto;">
@@ -53,8 +52,8 @@ A00282343
 </form>
 
 <script>
-    function duplicateCheck(){
-        if ( true == (${sessionScope.DUPLICATE_EMAIL})){
+    function duplicateCheck() {
+        if (true == (${sessionScope.DUPLICATE_EMAIL})) {
             alert("Email must be unique.");
         }
     }

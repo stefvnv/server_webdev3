@@ -8,13 +8,13 @@ package com.example.project;
 
 public class User {
 
-    // create user variables
+    //create user variables
     private String name;
     private String email;
     private String password;
 
     /**
-     * Constructor for email and password
+     * Constructor for name, email and password
      */
     public User(String name, String email, String password) {
         this.name = name;
@@ -30,7 +30,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
 
 
     /**

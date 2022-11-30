@@ -33,6 +33,10 @@ public class Grade {
         return year;
     }
 
+
+    /**
+     * Sets grades year
+     */
     public void setYear(String year) {
         this.year = year;
     }
@@ -45,6 +49,10 @@ public class Grade {
         return module;
     }
 
+
+    /**
+     * Sets grades module
+     */
     public void setModule(String module) {
         this.module = module;
     }
@@ -58,15 +66,25 @@ public class Grade {
     }
 
 
+    /**
+     * Sets grades grade
+     */
     public void setGrade(String grade) {
         this.grade = grade;
     }
 
 
+    /**
+     * Returns grades email
+     */
     public String getEmail() {
         return email;
     }
 
+
+    /**
+     * Sets grades email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

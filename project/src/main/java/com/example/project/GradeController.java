@@ -9,14 +9,11 @@ package com.example.project;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-/**
- * Servlet implementation class UserController
- */
+
 @WebServlet(name = "GradeController", value = "/GradeController")
 public class GradeController extends HttpServlet {
 
@@ -30,28 +27,28 @@ public class GradeController extends HttpServlet {
         super();
     }
 
-    /**
-     *
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
 
-    /**
-     *
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //gets session
         HttpSession session = request.getSession();
+
+        //stores session user in user object
         User currentUser = (User) session.getAttribute("user");
+
+        //
         ArrayList<Grade> gradesList = GradeDAO.checkGradeValidity(currentUser);
 
-        String year, module, email;
-        year = request.getParameter("current_row_year");
-        module = request.getParameter("current_row_module");
-        email = currentUser.getEmail();
+        //gets grade parameters
+        String year = request.getParameter("current_row_year");
+        String module = request.getParameter("current_row_module");
+        String email = currentUser.getEmail();
 
         //update
         if (request.getParameter("update") != null) {
@@ -66,7 +63,7 @@ public class GradeController extends HttpServlet {
                 throw new RuntimeException(e);
             }
 
-        //delete
+            //delete
         } else if (request.getParameter("delete") != null) {
 
             int indexToDelete = Integer.parseInt(request.getParameter("current_row_index"));
@@ -80,8 +77,10 @@ public class GradeController extends HttpServlet {
             }
         }
 
-        //
+        //sets grade list of the current user
         request.setAttribute("gradesList", GradeDAO.checkGradeValidity(currentUser));
+
+        //forwards to show grades page
         request.getRequestDispatcher("showGrades.jsp").forward(request, response);
     }
 }
