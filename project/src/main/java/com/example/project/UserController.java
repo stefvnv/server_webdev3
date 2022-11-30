@@ -46,22 +46,6 @@ public class UserController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        //set cookie variables
-        boolean userExists = false;
-        Cookie[] cookies = request.getCookies();
-        String cookieName = null;
-
-        for (int i = 0; i < cookies.length; i++) {
-
-            //if user is stored in cookie using email, sets boolean to true
-            if (cookies[i].getName().equals("email")) {
-                userExists = true;
-
-                //set cookie values
-                cookieName = cookies[i].getValue();
-            }
-        }
-
         //delete
         if (request.getParameter("delete") != null) {
 
