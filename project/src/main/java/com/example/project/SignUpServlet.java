@@ -31,18 +31,20 @@ public class SignUpServlet extends HttpServlet {
 
         //add the model as an attribute in the request
         request.setAttribute("user", user);
-
+        HttpSession session = request.getSession();
         //save user
         try {
             UserDAO.instance.save(user);
         } catch (Exception e) {
             System.out.println("Email must be unique");
-            HttpSession session = request.getSession();
+
             session.setAttribute("DUPLICATE_EMAIL", "true");
 
             request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
 
+
+        session.setAttribute("DUPLICATE_EMAIL", "false");
         //forward the updated request and response to out back to index
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

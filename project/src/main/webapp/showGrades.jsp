@@ -37,9 +37,9 @@ A00282343
     <h4>Welcome, <i>${sessionScope.user.name}</i></h4>
 </div>
 
-<div style="padding: 4%; width: 60%; margin: auto;">
+<div style="padding: 4%; width: 70%; margin: auto;">
     <div class="w3-card-4 w3-padding-small w3-round-xlarge">
-        <div class="w3-container w3-pink w3-round-xlarge w3-center">
+        <div class="w3-container w3-blue-gray w3-round-xlarge w3-center">
             <h3>Your Grades</h3>
         </div>
 

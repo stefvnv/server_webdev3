@@ -13,9 +13,23 @@ A00282343
     <title>Grade Manager | Add Grade</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<header>
-    <div class="w3-bar w3-border w3-pale-red w3-padding-small" style="width: 100%;">
+
+
+<header class="w3-bar w3-pale-red w3-padding-small" style="width: 100%">
+    <div style="float: left; width: 70%; font-weight: bold">
         <h2 style="font-weight: bold">Grade Manager - Add Grade</h2>
+    </div>
+
+    <div style="float: right; width: 15%">
+        <form method="post" action="UserController">
+            <input class="w3-input w3-red w3-round-xlarge" style="" type="submit" name="delete" value="Delete User">
+        </form>
+    </div>
+
+    <div style="float: right; width: 15%">
+        <form method="post" action="LogoutServlet">
+            <input class="w3-input w3-dark-gray w3-round-xlarge" style="" type="submit" value="Logout">
+        </form>
     </div>
 </header>
 
@@ -23,8 +37,8 @@ A00282343
 <body style="background-color:lavenderblush">
 <form method="post" action="AddGradeServlet" style="padding: 4%; width: 60%; margin: auto;">
     <div class="w3-card-4 w3-padding-small w3-round-xlarge">
-        <div class="w3-container w3-pink w3-round-xlarge w3-center">
-            <h3>ADD A NEW GRADE</h3>
+        <div class="w3-container w3-pink w3-round-xlarge">
+            <h3 class="w3-center">ADD NEW GRADE</h3>
         </div>
 
         <div class="w3-container">

@@ -21,7 +21,7 @@ A00282343
 
 
 <!--body-->
-<body onload="duplicateFun()" style="background-color:lavenderblush">
+<body onload="duplicateCheck()" style="background-color:lavenderblush">
 <form method="post" action="SignUpServlet" style="padding: 4%; width: 60%; margin: auto;">
 
     <div class="w3-card-4 w3-padding-small w3-round-xlarge">
@@ -53,14 +53,12 @@ A00282343
 </form>
 
 <script>
-    function duplicateFun(){
+    function duplicateCheck(){
         if ( true == (${sessionScope.DUPLICATE_EMAIL})){
-            alert("email must be shiniqua uniqua");
+            alert("Email must be unique.");
         }
     }
 </script>
-
-
 
 </body>
 </html>
