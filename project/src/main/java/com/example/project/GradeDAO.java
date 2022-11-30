@@ -54,7 +54,6 @@ public enum GradeDAO {
         psmt.setString(3, g.getGrade());
         psmt.setString(4, g.getEmail());
 
-
         psmt.executeUpdate();
         psmt.close();
         conn.close();
@@ -79,32 +78,29 @@ public enum GradeDAO {
 //    //update
 //
 //
-//    /**
-//     * DELETE
-//     * Deletes user from database
-//     */
-//    public boolean deleteGrade(String email) throws Exception {
-//        Connection conn = getConnection();
-//        Statement stmt = conn.createStatement();
-//        User u = selectOne(email);
-//        String n = u.getName();
-//
-//        //if doing database correctly (foreign keys, link table between user/books etc)
-//        //only one query needed - removing user from user table will remove all of their objects
-//        //from the other tables.
-//
-//        //however.... if choose to not create database with Normalization, you will need 2 queries
-//        //one to delete from each table individually like so.....
-//        //deleting user from user table
-//        int rs = stmt.executeUpdate("DELETE FROM USER where email= '" + email + "'");
-//        //deleting books from books table using name....
-//        int rs2 = stmt.executeUpdate("DELETE FROM Books where name= '" + n + "'");
-//        System.out.println(rs);
-//        if (rs > 0) {
-//            return true;
-//        }
-//        return false;
-//    }
+    /**
+     * DELETE
+     * Deletes grade from database
+     */
+    public boolean delete(String email) throws Exception {
+        Connection conn = UserDAO.getConnection();
+        Statement stmt = conn.createStatement();
+        //User u = selectOne(email);
+        ///String n = u.getName();
+
+        //if doing database correctly (foreign keys, link table between user/books etc)
+        //only one query needed - removing user from user table will remove all of their objects
+        //from the other tables.
+
+        //however.... if choose to not create database with Normalization, you will need 2 queries
+        //one to delete from each table individually like so.....
+        //deleting user from user table
+     //   int rs = stmt.executeUpdate("DELETE FROM USER where email= '" + email + "'");
+
+        //System.out.println(rs);
+
+        return false;
+    }
 //
 //
 //    /**

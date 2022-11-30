@@ -19,6 +19,7 @@ import javax.servlet.http.*;
  */
 @WebServlet(name = "UserController", value = "/UserController")
 public class UserController extends HttpServlet {
+    private User user;
 
     //create variables
     private static final long serialVersionUID = 1L;
@@ -81,31 +82,17 @@ public class UserController extends HttpServlet {
             HttpSession session = request.getSession();
 
             //create a new user model (domain object)
-            User user = UserDAO.checkLogin(email, password);
+            user = UserDAO.checkLogin(email, password);
 
             //set the attribute user
             session.setAttribute("user", user);
 
-            getGrades(user, request, response);
+            AddGradeServlet.getGrades(user, request, response);
 
 
         } else {
             //data gets gathered from here
             request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
-    }
-
-    private void getGrades(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       if(GradeDAO.checkGradeValidity(user) != null){
-           ArrayList<Grade> gradesList = GradeDAO.checkGradeValidity(user);
-
-           //add the model as an attribute in the request
-           request.setAttribute("gradesList", gradesList);
-           System.out.println(gradesList.get(0).getModule());
-        }else{
-           request.getRequestDispatcher("addGrade.jsp").forward(request, response);
-        }
-        //data gets outputted here
-        request.getRequestDispatcher("showGrades.jsp").forward(request, response);
     }
 }

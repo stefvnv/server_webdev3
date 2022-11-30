@@ -10,19 +10,19 @@ A00282343
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Grade Manager | Add Grade</title>
+    <title>Grade Manager | Your Grades</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <header>
     <div class="w3-bar w3-border w3-pale-red w3-padding-small" style="width: 100%;">
-        <h2>Grade Manager - Add Grade</h2>
+        <h2>Grade Manager - Your Grades</h2>
     </div>
 </header>
 
 <!--body-->
 <body style="background-color:lavenderblush">
 
-<div>
+<div class="w3-container">
     <h4>Welcome, ${sessionScope.user.name}</h4>
 </div>
 
@@ -34,26 +34,40 @@ A00282343
 
         <div class="w3-container">
             <!--table of results-->
-            <table>
+            <table id="tabbb">
                 <tr>
                     <th>Year</th>
                     <th>Module</th>
                     <th>Grade</th>
                 </tr>
 
+
+                <c:set var="count" value="0" scope="page" />
                 <c:forEach items="${gradesList}" var="grade" varStatus="status">
-                    <tr>
-                        <td>${grade.year}</td>
-                        <td>${grade.module}</td>
-                        <td>${grade.grade}</td>
+                    <tr id = "row_${count}">
+                        <td contenteditable>${grade.year}</td>
+                        <td contenteditable>${grade.module}</td>
+                        <td contenteditable>${grade.grade}</td>
+
+                        <td>
+                            <form method="post" action="GradeController">
+                                <input class="w3-input" type="hidden" name="arrayObject" value="sessionScope.gradesList">
+                                <input class="w3-input" type="hidden" name="current_row_index" value="${count}">
+                                <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%" type="submit" value="Delete">
+                            </form>
+                        </td>
                     </tr>
+                    <c:set var="count" value="${count + 1}" scope="page"/>
                 </c:forEach>
             </table>
 
-<%--            <div class="w3-margin">--%>
-<%--                <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%; margin:auto" type="submit"--%>
-<%--                       value="Add Grade">--%>
-<%--            </div>--%>
+            <form method="post" action="addGrade.jsp">
+                <input class="w3-input w3-pale-red w3-round-xlarge" style="width: 40%" type="submit" value="Add Grade">
+            </form>
+
+
+
+
         </div>
     </div>
 </div>

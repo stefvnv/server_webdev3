@@ -22,7 +22,7 @@ public class SignUpServlet extends HttpServlet {
 
         //get user parameters
         String name = request.getParameter("name");
-        String email= request.getParameter("email");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         //create a new user model (domain object)
