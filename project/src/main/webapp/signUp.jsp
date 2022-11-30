@@ -1,9 +1,8 @@
 <%--
-View - Sign up
+View - signUp
 Stefana Chiritescu
 A00282343
 --%>
-
 
 <!--head-->
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>

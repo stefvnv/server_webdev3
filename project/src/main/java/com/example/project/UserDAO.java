@@ -1,3 +1,9 @@
+/**
+ * Model - UserDAO
+ * Stefana Chiritescu
+ * A00282343
+ */
+
 package com.example.project;
 
 import java.sql.*;
@@ -6,10 +12,11 @@ import java.util.ArrayList;
 public enum UserDAO {
     instance;
 
+
     /**
      * Connects to database
      */
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
             return DriverManager.getConnection(
@@ -19,40 +26,10 @@ public enum UserDAO {
         }
     }
 
-    /**
-     * Checks if user attempting to login exists in database
-     */
-    public static User checkLogin(String email, String password){
-        Connection conn = getConnection();
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM USER where email ='" + email + "'");
-            while (rs.next()) {
-                if (rs.getString("password").equals(password)){
-                    return new User(rs.getString("name"), rs.getString("email"), rs.getString("password"));
-                }
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-
-
-        return null;
-
-    }
-
-    //CRUD
-    //Create - Insert - save
-    //Read - Select - list
-    //Update - Update - update
-    //Delete - Delete - remove
 
     /**
      * CREATE
-     * Saves user to database
+     * Saves (adds) user to database
      */
     public void save(User u) throws Exception {
         Connection conn = getConnection();
@@ -67,7 +44,34 @@ public enum UserDAO {
         conn.close();
     }
 
-    //Read
+
+    /**
+     * READ
+     * Checks if user attempting to login exists in database
+     */
+    public static User checkLogin(String email, String password) {
+        Connection conn = getConnection();
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM USER where email ='" + email + "'");
+            while (rs.next()) {
+                if (rs.getString("password").equals(password)) {
+                    return new User(rs.getString("name"), rs.getString("email"), rs.getString("password"));
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
+    /**
+     * READ
+     * Checks if user attempting to login exists in database
+     */
     public User selectOne(String email) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
@@ -83,26 +87,17 @@ public enum UserDAO {
         return null;
     }
 
-    //update
-
 
     /**
      * DELETE
      * Deletes user from database
      */
-    public boolean deleteUser(String email) throws Exception {
+    public boolean delete(String email) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
         User u = selectOne(email);
         String n = u.getName();
 
-        //if doing database correctly (foreign keys, link table between user/books etc)
-        //only one query needed - removing user from user table will remove all of their objects
-        //from the other tables.
-
-        //however.... if choose to not create database with Normalization, you will need 2 queries
-        //one to delete from each table individually like so.....
-        //deleting user from user table
         int rs = stmt.executeUpdate("DELETE FROM USER where email= '" + email + "'");
         //deleting books from books table using name....
         int rs2 = stmt.executeUpdate("DELETE FROM Books where name= '" + n + "'");

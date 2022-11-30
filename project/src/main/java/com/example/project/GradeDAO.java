@@ -1,3 +1,9 @@
+/**
+ * Model - GradeDAO
+ * Stefana Chiritescu
+ * A00282343
+ */
+
 package com.example.project;
 
 import org.apache.cxf.wsdl11.SOAPBindingUtil;
@@ -10,42 +16,8 @@ public enum GradeDAO {
 
 
     /**
-     * Checks if user attempting to login exists in database
-     */
-    public static ArrayList<Grade> checkGradeValidity(User user) {
-        Connection conn = UserDAO.getConnection();
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            ArrayList<Grade> gradesToReturn = new ArrayList<>();
-            //System.out.println("user email is " + user.getEmail());
-            ResultSet rs = stmt.executeQuery("SELECT * FROM GRADE where email ='" + user.getEmail() + "'");
-            while (rs.next()) {
-                gradesToReturn.add(new Grade(rs.getString("year"), rs.getString("module"), rs.getString("grade"), rs.getString("email")));
-            }
-            if (gradesToReturn.isEmpty()) {
-                System.out.println("its empty");
-                return null;
-            }
-            System.out.println(gradesToReturn.get(0).getEmail());
-            System.out.println("grades " + gradesToReturn);
-            return gradesToReturn;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    //CRUD
-    //Create - Insert - save
-    //Read - Select - list
-    //Update - Update - update
-    //Delete - Delete - remove
-
-    /**
      * CREATE
-     * Saves user to database
+     * Saves (adds) grade to database
      */
     public void save(Grade g) throws Exception {
         Connection conn = UserDAO.getConnection();
@@ -61,63 +33,73 @@ public enum GradeDAO {
         conn.close();
     }
 
-//    //Read
-//    public User selectOne(String email) throws Exception {
-//        Connection conn = getConnection();
-//        Statement stmt = conn.createStatement();
-//        ResultSet rs = stmt.executeQuery("SELECT * FROM USER where email ='" + email + "'");
-//        while (rs.next()) {
-//
-//            if (rs.getString("email").equals(email)) {
-//
-//                User u = new User(rs.getString("email"), rs.getString("name"), "blank");
-//                return u;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    //update
-//
-//
+
+    /**
+     * READ
+     * Checks if user attempting to log in exists in database
+     */
+    public static ArrayList<Grade> checkGradeValidity(User user) {
+        Connection conn = UserDAO.getConnection();
+        Statement stmt;
+
+        try {
+            stmt = conn.createStatement();
+            ArrayList<Grade> gradesToReturn = new ArrayList<>();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM GRADE where email ='" + user.getEmail() + "'");
+
+            while (rs.next()) {
+                gradesToReturn.add(new Grade(rs.getString("year"), rs.getString("module"), rs.getString("grade"), rs.getString("email")));
+            }
+            if (gradesToReturn.isEmpty()) {
+                System.out.println("its empty");
+                return null;
+            }
+            System.out.println(gradesToReturn.get(0).getEmail());
+            System.out.println("grades " + gradesToReturn);
+            return gradesToReturn;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * UPDATE
+     * Updates grade in database
+     */
+    public static void update(String email, String year, String module, String newGrade, int listSize) throws SQLException {
+        Connection conn = UserDAO.getConnection();
+        Statement stmt = conn.createStatement();
+
+
+        if (listSize == 0) {
+            int rs = stmt.executeUpdate("UPDATE GRADE SET Grade = '" + newGrade + "' WHERE year = '" + year + "' and module = '" + module + "'" + "and email = '" + email + "'");
+            System.out.println(rs + " record(s) updated");
+        }
+        for (int i = 0; i < listSize; i++) {
+            int rs = stmt.executeUpdate("UPDATE GRADE SET Grade = '" + newGrade + "' WHERE year = '" + year + "' and module = '" + module + "'" + "and email = '" + email + "'");
+            System.out.println(rs + " record(s) updated");
+        }
+    }
+
+
     /**
      * DELETE
      * Deletes grade from database
      */
-    public static void delete(ArrayList<Grade> listo, String deleteMod, String deleteEmail) throws Exception {
+    public static void delete(String deleteMod, String deleteEmail, int listSize) throws Exception {
         Connection conn = UserDAO.getConnection();
         Statement stmt = conn.createStatement();
-        //User u = selectOne(email);
-        ///String n = u.getName();
 
-        //if doing database correctly (foreign keys, link table between user/books etc)
-        //only one query needed - removing user from user table will remove all of their objects
-        //from the other tables.
 
-        //however.... if choose to not create database with Normalization, you will need 2 queries
-        //one to delete from each table individually like so.....
-        //deleting user from user table
-        for (Grade record:listo){
-            System.out.println("Deletting from grade where email = " + record.getEmail() + " and module = " + record.getModule());
-            int rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + deleteEmail + "'and module= '"+ deleteMod+"'" );
+        if (listSize == 0) {
+            int rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + deleteEmail + "'and module= '" + deleteMod + "'");
             System.out.println(rs + " record(s) deleted");
         }
-
+        for (int i = 0; i < listSize; i++) {
+            System.out.println("Deletting from grade where email = " + deleteEmail + " and module = " + deleteMod);
+            int rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + deleteEmail + "'and module= '" + deleteMod + "'");
+            System.out.println(rs + " record(s) deleted");
+        }
     }
-//
-//
-//    /**
-//     *
-//     */
-//    public ArrayList<Grade> list() throws Exception {
-//        ArrayList<Grade> listOfGrades = new ArrayList();
-//        Connection conn = getConnection();
-//        Statement stmt = conn.createStatement();
-//        ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
-//        while (rs.next()) {
-//            User u = new User("blank", rs.getString("name"), rs.getString("address"));
-//            listOfUsers.add(u);
-//        }
-//        return listOfUsers;
-//    }
 }

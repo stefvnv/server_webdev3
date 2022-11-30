@@ -15,11 +15,10 @@ public class Grade {
     private String email;
 
 
-
     /**
      * Constructor
      */
-    public Grade(String year, String module, String grade, String email){
+    public Grade(String year, String module, String grade, String email) {
         this.year = year;
         this.module = module;
         this.grade = grade;
@@ -57,7 +56,6 @@ public class Grade {
     public String getGrade() {
         return grade;
     }
-
 
 
     public void setGrade(String grade) {

@@ -1,5 +1,5 @@
 <%--
-View - Add Grade
+View - addGrade
 Stefana Chiritescu
 A00282343
 --%>
@@ -15,7 +15,7 @@ A00282343
 </head>
 <header>
     <div class="w3-bar w3-border w3-pale-red w3-padding-small" style="width: 100%;">
-        <h2>Grade Manager - Add Grade</h2>
+        <h2 style="font-weight: bold">>Grade Manager - Add Grade</h2>
     </div>
 </header>
 

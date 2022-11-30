@@ -1,3 +1,9 @@
+/**
+ * Controller - AddGradeServlet
+ * Stefana Chiritescu
+ * A00282343
+ */
+
 package com.example.project;
 
 import javax.servlet.ServletException;
@@ -14,7 +20,6 @@ public class AddGradeServlet extends HttpServlet {
     private static final long serialVersionID = 1L;
 
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -29,7 +34,7 @@ public class AddGradeServlet extends HttpServlet {
         String email = request.getParameter("email");
 
         //create a new grade (domain object)
-        Grade gradeObj = new Grade (year, module, grade, email);
+        Grade gradeObj = new Grade(year, module, grade, email);
 
         //add the model as an attribute in the request
         request.setAttribute("addingGrade", gradeObj);
@@ -48,8 +53,9 @@ public class AddGradeServlet extends HttpServlet {
 
         getGrades((User) session.getAttribute("user"), request, response);
     }
+
     public static void getGrades(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(GradeDAO.checkGradeValidity(user) != null){
+        if (GradeDAO.checkGradeValidity(user) != null) {
             ArrayList<Grade> gradesList = GradeDAO.checkGradeValidity(user);
 
             System.out.println("setting gradeslist to not null");
@@ -57,7 +63,7 @@ public class AddGradeServlet extends HttpServlet {
             request.setAttribute("gradesList", gradesList);
 
             System.out.println(gradesList.get(0).getEmail());
-        }else{
+        } else {
             request.getRequestDispatcher("addGrade.jsp").forward(request, response);
         }
         //data gets outputted here

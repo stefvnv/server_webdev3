@@ -19,22 +19,20 @@ import javax.servlet.http.*;
  */
 @WebServlet(name = "UserController", value = "/UserController")
 public class UserController extends HttpServlet {
-    private User user;
 
-    //create variables
+    //initialize variables
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
+    private User user;
 
     /**
-     *
+     * Constructor
      */
     public UserController() {
         super();
     }
 
-    /**
-     *
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().append("Served at: ").append(request.getContextPath());
