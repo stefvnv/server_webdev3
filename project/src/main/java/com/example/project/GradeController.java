@@ -45,19 +45,27 @@ public class GradeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-       String count = request.getParameter("current_row_index");
 
+        int indexToDelete = Integer.parseInt(request.getParameter("current_row_index"));
 
-
+        System.out.println("INDEX CLICKED = " + indexToDelete);
         HttpSession session = request.getSession();
-        System.out.println(test.getName());
-        ArrayList<Grade> currentList = (ArrayList<Grade>) request.getParameter("arrayObject");
-        System.out.println(currentList);
-        //System.out.println("passes list = " + currentList.get(0));
-        //currentList.remove(Integer.parseInt(count));
-        //currentList.trimToSize();
-        //request.setAttribute("gradesList", currentList);
 
+        User test = (User) session.getAttribute("user");
+
+        ArrayList<Grade> gradesList = GradeDAO.checkGradeValidity(test);
+        String moduleToDelete, emailToDelete;
+        assert gradesList != null;
+        moduleToDelete = gradesList.get(indexToDelete).getModule();
+        emailToDelete = gradesList.get(indexToDelete).getEmail();
+        gradesList.remove(indexToDelete);
+        gradesList.trimToSize();
+        try {
+            GradeDAO.delete(gradesList, moduleToDelete, emailToDelete);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        request.setAttribute("gradesList", GradeDAO.checkGradeValidity(test));
 
         request.getRequestDispatcher("showGrades.jsp").forward(request, response);
 

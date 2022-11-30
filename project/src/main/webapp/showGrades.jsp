@@ -59,6 +59,7 @@ A00282343
                     </tr>
                     <c:set var="count" value="${count + 1}" scope="page"/>
                 </c:forEach>
+                <c:set var="count" value="0" scope="page"/>
             </table>
 
             <form method="post" action="addGrade.jsp">

@@ -1,5 +1,7 @@
 package com.example.project;
 
+import org.apache.cxf.wsdl11.SOAPBindingUtil;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -82,7 +84,7 @@ public enum GradeDAO {
      * DELETE
      * Deletes grade from database
      */
-    public boolean delete(String email) throws Exception {
+    public static void delete(ArrayList<Grade> listo, String deleteMod, String deleteEmail) throws Exception {
         Connection conn = UserDAO.getConnection();
         Statement stmt = conn.createStatement();
         //User u = selectOne(email);
@@ -95,11 +97,12 @@ public enum GradeDAO {
         //however.... if choose to not create database with Normalization, you will need 2 queries
         //one to delete from each table individually like so.....
         //deleting user from user table
-     //   int rs = stmt.executeUpdate("DELETE FROM USER where email= '" + email + "'");
+        for (Grade record:listo){
+            System.out.println("Deletting from grade where email = " + record.getEmail() + " and module = " + record.getModule());
+            int rs = stmt.executeUpdate("DELETE FROM GRADE where email= '" + deleteEmail + "'and module= '"+ deleteMod+"'" );
+            System.out.println(rs + " record(s) deleted");
+        }
 
-        //System.out.println(rs);
-
-        return false;
     }
 //
 //
